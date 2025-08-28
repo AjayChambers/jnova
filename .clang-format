@@ -1,0 +1,58 @@
+---
+BasedOnStyle: Microsoft
+IndentWidth: 2
+---
+Language: Cpp
+PointerAlignment: Left
+# LINE LENGTH 
+ColumnLimit: 90
+# EMPTY LINES
+MaxEmptyLinesToKeep: 6
+RemoveEmptyLinesInUnwrappedLines: false
+# INDENTATION
+AccessModifierOffset: -1
+BracedInitializerIndentWidth: 1
+NamespaceIndentation: All
+# CTOR INITIALIZER STYLE
+PackConstructorInitializers: Never
+# FUNCTION DEFINITION STYLE
+AllowAllParametersOfDeclarationOnNextLine: true
+BreakAfterReturnType: AllDefinitions
+# FUNCTION DECLARATION STYLE
+AlignAfterOpenBracket: BlockIndent
+AlignConsecutiveDeclarations:
+    Enabled: true
+    AlignFunctionPointers: true
+    AcrossComments: true
+# BRACE WRAPPING STYLE
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterClass: true
+    AfterControlStatement: MultiLine
+    SplitEmptyFunction: false 
+    SplitEmptyRecord: false
+    SplitEmptyNamespace: false 
+# STRING FORMATTING STYLE
+BreakAdjacentStringLiterals: true
+# OPERATOR & ASSIGNMENT STYLE
+AlignOperands: AlignAfterOperator
+AlignConsecutiveAssignments:
+    Enabled: true
+    AlignCompound: true
+# MACRO FORMATTING
+AlignConsecutiveMacros:
+    Enabled: true
+    AcrossEmptyLines: true
+    AcrossComments: true
+AlignEscapedNewlines: LeftWithLastLine
+# SWITCH & CASE STATEMENT STYLE
+AlignConsecutiveShortCaseStatements:
+    Enabled: true
+    AlignCaseColons: true
+# COMMENT FORMATTING
+AlignTrailingComments:
+    Kind: Always
+    OverEmptyLines: 3
+FixNamespaceComments: false
+# MISCELLANEOUS FORMATTING
+RemoveSemicolon: true

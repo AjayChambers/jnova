@@ -1,0 +1,19 @@
+# ninja log v6
+1	6	1756293866747770314	src/CMakeFiles/jnova.dir/jnova.lib.cpp.o.ddi	5a201dced84ded55
+6	11	1756293866758101064	src/CMakeFiles/jnova.dir/CXX.dd	6a6bbcf111018fc9
+6	11	1756293866758101064	/home/ajay/DEV/Repos/jnova/build/src/CMakeFiles/jnova.dir/CXXModules.json	6a6bbcf111018fc9
+6	11	1756293866758101064	src/CMakeFiles/jnova.dir/jnova.lib.cpp.o.modmap	6a6bbcf111018fc9
+11	20	1756293866758101064	src/CMakeFiles/jnova.dir/jnova.lib.cpp.o	2a9de4331f5e9d60
+20	48	1756293866767137735	src/libjnova.a	7060088da0b498ba
+0	5	1756407157098028080	tests/CMakeFiles/run_tests.dir/runner.test.cpp.o.ddi	7a77ac32c77783a1
+5	10	1756407157107609290	tests/CMakeFiles/run_tests.dir/CXX.dd	f63def9fe360a138
+5	10	1756407157107609290	/home/ajay/DEV/Repos/jnova/build/tests/CMakeFiles/run_tests.dir/CXXModules.json	f63def9fe360a138
+5	10	1756407157107609290	tests/CMakeFiles/run_tests.dir/runner.test.cpp.o.modmap	f63def9fe360a138
+10	20	1756407157107828580	tests/CMakeFiles/run_tests.dir/runner.test.cpp.o	a362a62da3403cd
+0	68	1756407157096362903	src/CMakeFiles/jnova.dir/jnova.lib.cpp.o.ddi	d2f72f8e2a05ac09
+68	78	1756407157164363728	src/CMakeFiles/jnova.dir/CXX.dd	6a6bbcf111018fc9
+68	78	1756407157164363728	/home/ajay/DEV/Repos/jnova/build/src/CMakeFiles/jnova.dir/CXXModules.json	6a6bbcf111018fc9
+68	78	1756407157164363728	src/CMakeFiles/jnova.dir/jnova.lib.cpp.o.modmap	6a6bbcf111018fc9
+78	752	1756407157175112903	src/CMakeFiles/jnova.dir/jnova.lib.cpp.o	9241ea7a6f5b9e98
+753	777	1756407157851022244	src/libjnova.a	7060088da0b498ba
+777	821	1756407157873372325	tests/run_tests	91e5b0362f2d60d
