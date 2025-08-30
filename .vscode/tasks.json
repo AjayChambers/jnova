@@ -2,52 +2,126 @@
     "version": "2.0.0",
     "tasks": [
         {
+            /*
+        
+
+            *******************************************************************
+            * TASK "CMAKE | UPDATE BUILD"
+            *******************************************************************/
             "label": "CMAKE: UPDATE BUILD",
             "detail": "CMake: Updates build by compiling all (and only all) files that have had changes made to them.",
             "type": "shell",
+            "problemMatcher": ["$gcc"],
             "command": "cmake",
-            "args": [
-                "--build",
-                "${workspaceFolder}/build"
-            ],
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "args": ["--build", "${workspaceFolder}/build"],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "presentation": {
-                "reveal": "silent",
+                "echo": true,
+                "reveal": "always",
+                "panel": "shared",
+                "group": "fresh-build",
                 "revealProblems": "onProblem",
-                "panel": "dedicated",
-                "showReuseMessage": false,
-                "clear": true,
-                "group": "build"
+                "clear": true
             },
             "icon": {
                 "color": "terminal.ansiBlue",
-                "id": "refresh"
+                "id": "debug-breakpoint-data"
             }
         },
+        /*
+        
+        
+        
+        *******************************************************************
+        * TASK "FRESH BUILD ✨"
+        *******************************************************************/
         {
-            "label": "CMAKE: REINITIALIZE PROJECT",
-            "detail": "CMAKE: Reinitialize project build-system, build dir, & source dir.",
+            "label": "FRESH BUILD ✨",
+            "detail": "CMake: Delete the old build and generate a new one.",
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "dependsOn": [
+                "DELETE OLD BUILD & CACHES 🧹",
+                "REINITIALIZE PROJECT ↻",
+                "CMAKE: UPDATE BUILD"
+            ],
+            "dependsOrder": "sequence",
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "panel": "shared",
+                "group": "fresh-build",
+                "revealProblems": "onProblem"
+            },
+            "icon": {
+                "color": "terminal.ansiYellow",
+                "id": "debug-breakpoint-data"
+            }
+        },
+        /*
+        
+        
+        
+        *******************************************************************
+        * TASK "🧹 DELETE OLD BUILD & CACHES"
+        *******************************************************************/
+        {
+            "label": "DELETE OLD BUILD & CACHES 🧹",
+            "detail": "Delete build directory & cmake caches.",
+            "dependsOn": [
+                "ECHO: DELETE OLD BUILD & CACHES",
+                "BASH: DELETE OLD BUILD & CACHES"
+            ],
+            "dependsOrder": "sequence",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false,
+                "group": "removal"
+            },
+            "icon": {
+                "color": "terminal.ansiRed",
+                "id": "debug-breakpoint-data"
+            },
+            "problemMatcher": []
+        },
+
+        /*
+        
+        
+        
+        *******************************************************************
+        * TASK "REINITIALIZE PROJECT CONFIG ↻"
+        *******************************************************************/
+        {
+            "label": "REINITIALIZE PROJECT ↻",
+            "detail": "Reinitialize project generator, caches, and build config",
             "type": "shell",
             "command": "cmake",
-            "hide": false,
+            "problemMatcher": [],
             "args": [
                 "-G",
-                "Unix Makefiles",
+                "Ninja",
                 "-B",
                 "${workspaceFolder}/build",
                 "-S",
-                "${workspaceFolder}"
+                "${workspaceFolder}",
+                "-G",
+                "Ninja",
+                "-DCMAKE_BUILD_TYPE=Debug",
+                "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+                "-DCMAKE_C_COMPILER=/usr/bin/gcc",
+                "-DCMAKE_CXX_COMPILER=/usr/bin/g++"
             ],
-            "group": "none",
+            "group": "build",
             "presentation": {
                 "echo": true,
-                "reveal": "always",
+                "reveal": "silent",
                 "panel": "shared",
                 "showReuseMessage": false,
                 "clear": true,
@@ -55,57 +129,96 @@
             },
             "icon": {
                 "color": "terminal.ansiMagenta",
-                "id": "repo-create"
-            },
-            "problemMatcher": []
+                "id": "debug-breakpoint-data"
+            }
         },
+        /*
+        
+        ************************
+        * !! HIDDEN
+        ************************/
         {
-            "label": "BASH: RM BUILD DIR",
-            "detail": "CMake: Deletes the current build directory and all of its contents.",
-            "type": "shell",
-            "hide": false,
-            "command": "rm",
-            "args": [
-                "-R",
-                "${workspaceFolder}/build"
-            ],
-            "group": "none",
-            "presentation": {
-                "reveal": "silent",
-                "panel": "shared",
-                "echo": true,
-                "showReuseMessage": false,
-                "clear": true,
-                "group": "fresh-build"
-            },
-            "icon": {
-                "color": "terminal.ansiRed",
-                "id": "trash"
-            },
-            "problemMatcher": []
-        },
-        {
-            "label": "CMAKE: FRESH BUILD",
-            "detail": "CMake: Delete the old build and generate a new one.",
-            "group": "build",
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "dependsOn": [
-                "BASH: RM BUILD DIR",
-                "CMAKE: REINITIALIZE PROJECT",
-                "CMAKE: UPDATE BUILD"
-            ],
+            "hide": true,
+            "label": "ECHO: DELETE OLD BUILD & CACHES",
+            "problemMatcher": [],
+            "command": "echo",
+            "args": ["Reinitializing Build"],
             "presentation": {
                 "echo": false,
                 "reveal": "silent",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+                "group": "removal"
+            }
+        },
+        /* 
+        
+        ************************
+        * !! HIDDEN
+        ************************/
+        {
+            "hide": true,
+            "label": "ECHO: DELETE OLD BUILD & CACHES",
+            "problemMatcher": [],
+            "command": "echo",
+            "args": ["🧹 Cleaning previous build artifacts..."],
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true,
+                "group": "removal"
+            }
+        },
+        /* 
+        
+        ************************
+        * !! HIDDEN
+        ************************/
+        {
+            "hide": true,
+            "label": "BASH: DELETE OLD BUILD & CACHES",
+            "detail": "CMake: Deletes the current build directory and all of its contents.",
+            "problemMatcher": [],
+            "command": "rm",
+            "args": [
+                "-Rf",
+                "${workspaceFolder}/build",
+                "${workspaceFolder}/CMakeFiles",
+                "${workspaceFolder}/CMakeCache.txt"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "echo": false,
+                "showReuseMessage": false,
+                "clear": false,
+                "group": "removal"
+            }
+        },
+        /* 
+        
+        ************************
+        * !! HIDDEN
+        ************************/
+        {
+            "hide": true,
+            "label": "NINJA BUILD",
+            "detail": "CMake: Updates build by compiling all (and only all) files that have had changes made to them.",
+            "type": "shell",
+            "problemMatcher": ["$gcc"],
+            "command": "ninja",
+            "args": ["-C", "build"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
                 "revealProblems": "onProblem",
                 "panel": "shared",
-                "group": "fresh-build"
-            },
-            "icon": {
-                "color": "terminal.ansiGreen",
-                "id": "repo-create"
+                "group": "fresh-build",
+                "clear": true
             }
         }
     ]
