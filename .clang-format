@@ -1,41 +1,62 @@
 ---
-BasedOnStyle: Microsoft
-IndentWidth: 2
----
 Language: Cpp
-PointerAlignment: Left
-# LINE LENGTH 
+#
+#
+############################################
+## GENERALIZED SETTINGS
+BasedOnStyle: Google
 ColumnLimit: 90
-# EMPTY LINES
+IndentWidth: 4
 MaxEmptyLinesToKeep: 6
-RemoveEmptyLinesInUnwrappedLines: false
-# INDENTATION
 AccessModifierOffset: -1
-BracedInitializerIndentWidth: 1
+BracedInitializerIndentWidth: 2
+ContinuationIndentWidth: 2
 NamespaceIndentation: All
-# CTOR INITIALIZER STYLE
+RemoveEmptyLinesInUnwrappedLines: false
+#
+#
+############################################
+## CTOR INITIALIZER STYLE
 PackConstructorInitializers: Never
-# FUNCTION DEFINITION STYLE
+ConstructorInitializerIndentWidth: 0
+#
+#
+############################################
+## FUNCTION DEFINITION STYLE
+AllowShortFunctionsOnASingleLine: Inline # Only merge functions defined inside a class. Implies empty.
 AllowAllParametersOfDeclarationOnNextLine: true
 BreakAfterReturnType: AllDefinitions
-# FUNCTION DECLARATION STYLE
+#
+#
+############################################
+## FUNCTION DECLARATION STYLE
 AlignAfterOpenBracket: BlockIndent
 AlignConsecutiveDeclarations:
     Enabled: true
     AlignFunctionPointers: true
     AcrossComments: true
-# BRACE WRAPPING STYLE
+#
+#
+############################################
+## CONTROL STATEMENTS & LOOPS
+AllowShortLoopsOnASingleLine: true
+#
+#
+############################################
+## BRACE WRAPPING STYLE
 BreakBeforeBraces: Custom
 BraceWrapping:
     AfterClass: true
     AfterControlStatement: MultiLine
     SplitEmptyFunction: false 
     SplitEmptyRecord: false
-    SplitEmptyNamespace: false 
+    SplitEmptyNamespace: false
 # STRING FORMATTING STYLE
 BreakAdjacentStringLiterals: true
-# OPERATOR & ASSIGNMENT STYLE
-AlignOperands: AlignAfterOperator
+BreakStringLiterals: true
+# OPERATORS & ASSIGNMENTS
+AlignOperands: DontAlign # AlignAfterOperator
+PointerAlignment: Left
 AlignConsecutiveAssignments:
     Enabled: true
     AlignCompound: true

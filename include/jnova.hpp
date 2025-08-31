@@ -13,17 +13,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see 'https://www.gnu.org/licenses/'.
- * 
+ *
  * --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
- * 
+ *
  * source: "include/jnova.hpp"
- * author: "Andrew Chambers" 
+ * author: "Andrew Chambers"
  * email:  "w3dojo@gmail.com"
  * repo:   "https://GitHub.com/AjayChambers/jnova.git"
  * desc:
  *************************************************************************/
 
-#include "typedefs.hpp"
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -32,61 +31,21 @@
 #include <unordered_set>
 #include <vector>
 
+#include "jbuff.hpp"
+#include "typedefs.hpp"
+
 namespace fs = std::filesystem;
 
 using fs::path;
 using std::string;
 using std::string_view;
 
-namespace Jnova
-{
-  class JsonBuffer
-  {
-    string      data;
-    string_view view;
+namespace Jnova {
+    class Lexer
+    {
+        JsonBuffer json;
 
-    fs::path filepath = "";
-
-
-   public:
-    // COPY CTOR
-    JsonBuffer();
-    JsonBuffer(JsonBuffer& rs);
-    // STRING
-    JsonBuffer(string& jsonString);
-    JsonBuffer(string&& jsonString);
-    //
-    JsonBuffer(const fs::path& filepath);
-    JsonBuffer(fs::path&& filepath);
-    // STRING VIEW
-    JsonBuffer(string_view jsonString);
-
-
-    void
-    fromFile()
-    {}
-
-    void setFilepath(const fs::path& filepath);
-    void setFilepath(fs::path&& filepath);
-    void setFilepath(const string& json_str);
-    void setFilepath(string&& filepath);
-    void setFilepath(std::string_view filepath);
-
-    fs::path getFilepath() const noexcept;
-
-    bool read(); // TODO | Add a mode option parameter
-  };
-
-
-
-
-
-
-  class Lexer
-  {
-    JsonBuffer json;
-
-   public:
-    Lexer(JsonBuffer json);
-  };
+       public:
+        Lexer(JsonBuffer json);
+    };
 }
