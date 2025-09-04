@@ -1,3 +1,7 @@
+# DEVELOPERS PERSONAL FILES
+Dev/
+docs/
+
 # VS Code
 .vscode/settings.json
 .vscode/launch.json

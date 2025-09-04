@@ -1,16 +1,21 @@
 # Function: write_test_json
-# Args:
-#   OUTPUT_PATH — full path to the JSON file to write
-#   ...         — one or more lines of JSON content
-function(write_test_data OUTPUT_PATH)
-  # Ensure parent directory exists
-  get_filename_component(OUT_DIR "${OUTPUT_PATH}" DIRECTORY)
-  file(MAKE_DIRECTORY "${OUT_DIR}")
+#
+# WRITE TEST DATA EXAMPLE:
+#
+# write_test_data(
+#   "testdata-0.json"
+#   "{"
+#   "    \"Apple\": \"Granny-Smith\","
+#   "    \"Grape\": \"Concord\","
+#   "    \"Orange\": \"Navel\""
+#   "}"
+# )
+function(write_test_data filename)
+  file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/data/${filename}" "")
+  file(WRITE "./data/${filename}" "")
 
-  # Write the first argument (path), then append each JSON line
-  file(WRITE "${OUTPUT_PATH}" "")            # clear any existing file
   foreach(line IN LISTS ARGN)
-    file(APPEND "${OUTPUT_PATH}" "${line}\n")
+    file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/data/${filename}" "${line}\n")
+    file(APPEND "./data/${filename}" "${line}\n")
   endforeach()
-  message(STATUS "Generated test JSON at: ${OUTPUT_PATH}")
 endfunction()

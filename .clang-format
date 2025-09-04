@@ -1,79 +1,56 @@
 ---
 Language: Cpp
-#
-#
-############################################
-## GENERALIZED SETTINGS
 BasedOnStyle: Google
-ColumnLimit: 90
+ColumnLimit: 80
+MaxEmptyLinesToKeep: 8
+
+# INDENTATION
 IndentWidth: 4
-MaxEmptyLinesToKeep: 6
-AccessModifierOffset: -1
-BracedInitializerIndentWidth: 2
+AccessModifierOffset: -2
 ContinuationIndentWidth: 2
-NamespaceIndentation: All
-RemoveEmptyLinesInUnwrappedLines: false
-#
-#
-############################################
-## CTOR INITIALIZER STYLE
-PackConstructorInitializers: Never
+BracedInitializerIndentWidth: 1
 ConstructorInitializerIndentWidth: 0
-#
-#
-############################################
-## FUNCTION DEFINITION STYLE
-AllowShortFunctionsOnASingleLine: Inline # Only merge functions defined inside a class. Implies empty.
-AllowAllParametersOfDeclarationOnNextLine: true
-BreakAfterReturnType: AllDefinitions
-#
-#
-############################################
-## FUNCTION DECLARATION STYLE
+NamespaceIndentation: All
+UseTab: Never
+
+# STRING FORMATTING STYLE
+AlwaysBreakBeforeMultilineStrings: true
+BreakAdjacentStringLiterals: true
+BreakStringLiterals: true
+
+# FUNCTION FORMATTING
+BreakAfterReturnType: None
 AlignAfterOpenBracket: BlockIndent
-AlignConsecutiveDeclarations:
-    Enabled: true
-    AlignFunctionPointers: true
-    AcrossComments: true
-#
-#
-############################################
-## CONTROL STATEMENTS & LOOPS
-AllowShortLoopsOnASingleLine: true
-#
-#
-############################################
-## BRACE WRAPPING STYLE
+AllowAllArgumentsOnNextLine: true
+AllowShortFunctionsOnASingleLine: Inline
+# CONSTRUCTOR STYLE
+BreakInheritanceList: BeforeColon
+BreakConstructorInitializers: BeforeComma
+PackConstructorInitializers: Never
+
+# BRACE WRAPPING
 BreakBeforeBraces: Custom
 BraceWrapping:
-    AfterClass: true
-    AfterControlStatement: MultiLine
+    AfterClass: false
+    AfterFunction: true
+    AfterNamespace: true
     SplitEmptyFunction: false 
     SplitEmptyRecord: false
     SplitEmptyNamespace: false
-# STRING FORMATTING STYLE
-BreakAdjacentStringLiterals: true
-BreakStringLiterals: true
-# OPERATORS & ASSIGNMENTS
-AlignOperands: DontAlign # AlignAfterOperator
-PointerAlignment: Left
+    AfterEnum: false
+    AfterStruct: false
+
+# SYNTAX ALIGNMENT
 AlignConsecutiveAssignments:
     Enabled: true
     AlignCompound: true
-# MACRO FORMATTING
-AlignConsecutiveMacros:
-    Enabled: true
-    AcrossEmptyLines: true
-    AcrossComments: true
-AlignEscapedNewlines: LeftWithLastLine
-# SWITCH & CASE STATEMENT STYLE
 AlignConsecutiveShortCaseStatements:
     Enabled: true
     AlignCaseColons: true
-# COMMENT FORMATTING
 AlignTrailingComments:
     Kind: Always
-    OverEmptyLines: 3
-FixNamespaceComments: false
-# MISCELLANEOUS FORMATTING
+    OverEmptyLines: 2
+
+# MISCELLANEOUS
+FixNamespaceComments: true
 RemoveSemicolon: true

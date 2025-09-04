@@ -1,32 +1,36 @@
-# INCLUDE CTest & GTest
 include(CTest)
+enable_testing()
+
 include(fetch_gtest)
 fetch_gtest("https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip")
 
-# ADD/CONFIG TEST RUNNER 
-add_executable(run_tests "runner.test.cpp")
-target_link_libraries(run_tests PRIVATE jnova GTest::gtest_main)
-add_test(run_tests COMMAND run_tests)
-
-include(add_gtest)
-
-add_gtest(test_suite_01 run_suite_01 "suite_01.test.cpp" jnova)
-add_gtest(jbuff_test jbuff_test "jbuff.test.cpp" jnova)
 
 
+# Add the test executable
+add_executable(test_jsonbuffer test_jsonbuffer.cpp)
+target_link_libraries(test_jsonbuffer PRIVATE jsonbuffer)
+target_include_directories(test_jsonbuffer PUBLIC "../include")
 
-# Define where to drop your test JSON
-set(TEST_JSON_FILE )
+# Add the test
+add_test(NAME JsonBufferTest COMMAND test_jsonbuffer)
 
+# Where to generate the file
+set(TEST_JSON_PATH "${CMAKE_SOURCE_DIR}/tests/data/test_0.json")
 
-include(write_test_data)
-set(jbuff_test_data "${CMAKE_CURRENT_BINARY_DIR}/data/jbuff_test_data.json")
-# Call the function with static pseudo data
-write_test_data(
-  "${jbuff_test_data}"
-  "{"
-  "    \"Apple\": \"Granny-Smith\","
-  "    \"Grape\": \"Concord\","
-  "    \"Orange\": \"Navel\""
-  "}"
+# Generate JSON data for testing
+file(WRITE ${TEST_JSON_PATH}
+"{\n"
+"  \"name\": \"JNOVA\",\n"
+"  \"value\": 2025,\n"
+"  \"nested\": { \"true\": true }\n"
+"}\n"
 )
+
+configure_file(${TEST_JSON_PATH} ${CMAKE_BINARY_DIR}/tests/data/test.json COPYONLY)
+
+
+ target_link_libraries(test_jsonbuffer
+   PUBLIC GTest::gtest_main jsonbuffer)
+
+# Inject the path into the test code as a compile definition
+target_compile_definitions(test_jsonbuffer PUBLIC TEST_JSON_PATH=\"${TEST_JSON_PATH}\")

@@ -1,3 +1,4 @@
+# Fetches Google Tests and adds it to the project
 function(fetch_gtest gtest_zip_url)
     include(FetchContent)
     
@@ -10,4 +11,4 @@ function(fetch_gtest gtest_zip_url)
     FetchContent_MakeAvailable(googletest)
     include(GoogleTest)
     # message(STATUS "")
-endfunction()
+endfunction() 
