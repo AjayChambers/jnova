@@ -39,8 +39,8 @@ namespace JNOVA
         const std::string_view viewData() const noexcept;
 
         // // TODO: Overload the stream operators as follows:
-        // friend fstream &operator<<(fs::path fpath, JsonBuffer jbuff);
-        // friend fstream &operator>>(fs::path fpath, JsonBuffer jbuff);
+        // friend void operator<<(const ostream& os, JsonBuffer& jbuff);
+        friend void operator>>(const fs::path& is, JsonBuffer& jbuff);
     };
 }  // namespace JNOVA
 #endif

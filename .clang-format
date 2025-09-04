@@ -2,7 +2,7 @@
 Language: Cpp
 BasedOnStyle: Google
 ColumnLimit: 80
-MaxEmptyLinesToKeep: 8
+MaxEmptyLinesToKeep: 10
 
 # INDENTATION
 IndentWidth: 4

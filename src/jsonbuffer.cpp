@@ -7,10 +7,8 @@ using namespace std;
 namespace JNOVA
 {
     // JSONBUFFER CONSTRUCTORS
+
     JsonBuffer::JsonBuffer() {}
-
-
-
 
     JsonBuffer::JsonBuffer(const string& jsonData)
     : data(jsonData)
@@ -20,7 +18,14 @@ namespace JNOVA
 
 
 
+
+
+
+
+
+
     // JSONBUFFER LOGIC FUNCTION MEMBERS
+
     void JsonBuffer::clear() noexcept
     {
         data.clear();
@@ -57,7 +62,7 @@ namespace JNOVA
             data += c;
         }
 
-        if (jsonFile.bad()) {
+        if (jsonFile.bad() && !jsonFile.eof()) {
             throw runtime_error("Fatal I/O error while reading file.");
         }
 
@@ -72,13 +77,16 @@ namespace JNOVA
 
 
 
+
+
+
+
     // JSONBUFFER ACCESSORS
+
     void JsonBuffer::setFilepath(const string& jsonpath) noexcept
     {
         path = jsonpath;
     }
-
-
 
 
     const std::string_view JsonBuffer::viewData() const noexcept
@@ -87,18 +95,32 @@ namespace JNOVA
     }
 
 
-
-
     const std::string JsonBuffer::getPath() const noexcept
     {
         return this->path;
     }
 
 
-
-
     const std::string JsonBuffer::getData() const noexcept
     {
         return this->data;
     }
+
+
+
+
+
+
+    // JsonBuffer's Overloaded Operators
+
+    void operator>>(const fs::path& fpath, JsonBuffer& jbuff)
+    {
+        jbuff.setFilepath(fpath);
+        jbuff.read();
+    }
+
+
+
+    // void operator<<(const ostream& os, JsonBuffer& jbuff) {}
+
 }  // namespace JNOVA
