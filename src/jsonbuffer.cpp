@@ -1,14 +1,14 @@
-
 #include <jsonbuffer.hpp>
 
 using namespace std;
-
 
 namespace JNOVA
 {
     // JSONBUFFER CONSTRUCTORS
 
     JsonBuffer::JsonBuffer() {}
+
+
 
     JsonBuffer::JsonBuffer(const string& jsonData)
     : data(jsonData)
@@ -22,16 +22,12 @@ namespace JNOVA
 
 
 
-
-
     // JSONBUFFER LOGIC FUNCTION MEMBERS
-
     void JsonBuffer::clear() noexcept
     {
         data.clear();
         view = data;
     }
-
 
 
 
@@ -89,16 +85,19 @@ namespace JNOVA
     }
 
 
+
     const std::string_view JsonBuffer::viewData() const noexcept
     {
         return this->view;
     }
 
 
+
     const std::string JsonBuffer::getPath() const noexcept
     {
         return this->path;
     }
+
 
 
     const std::string JsonBuffer::getData() const noexcept
@@ -111,7 +110,9 @@ namespace JNOVA
 
 
 
-    // JsonBuffer's Overloaded Operators
+
+
+    // JSONBUFFER OVERLOADED OPERATORS
 
     void operator>>(const fs::path& fpath, JsonBuffer& jbuff)
     {
@@ -121,6 +122,12 @@ namespace JNOVA
 
 
 
-    // void operator<<(const ostream& os, JsonBuffer& jbuff) {}
+    ostream& operator<<(ostream& os, JsonBuffer& jbuff)
+    {
+        os << jbuff.viewData();
+
+        return os;
+    }
+
 
 }  // namespace JNOVA
