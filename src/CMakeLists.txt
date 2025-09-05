@@ -1,12 +1,9 @@
-cmake_minimum_required(VERSION 3.10)
-project(JsonBufferTest)
-
-# CONFIG 'jsonbuffer' TO BE A STATIC LIBRARY TARGET
-add_library(jsonbuffer STATIC jsonbuffer.cpp)
-add_library(jsonlexer STATIC jsonlexer.cpp)
+add_library(jsonBuffer STATIC jsonBuffer.cpp)
+add_library(jsonLexer STATIC jsonLexer.cpp)
 
 # Inform target where to find project header files
-target_include_directories(jsonbuffer PUBLIC "../include")
-target_include_directories(jsonlexer PUBLIC "../include")
+target_include_directories(jsonBuffer PUBLIC "../include")
+target_include_directories(jsonLexer PUBLIC "../include")
 
-target_link_libraries(jsonlexer PUBLIC jsonbuffer)
+# Include jsonBuffer lib in jsonLexer lib
+target_link_libraries(jsonLexer PUBLIC jsonBuffer)

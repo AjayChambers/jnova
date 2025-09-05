@@ -5,11 +5,18 @@
 #include <gtest/gtest.h>
 
 #include <format>
-#include <jsonbuffer.hpp>
-
+#include <json/buffer.hpp>
 
 using namespace std;
 using namespace JNOVA;
+
+
+
+
+/*
+ ****************************************************************
+ * TEST HELPER FUNCTIONS
+ ****************************************************************/
 
 bool expectedJsonEquals(const string& actualJson)
 {
@@ -26,11 +33,10 @@ bool expectedJsonEquals(const string& actualJson)
 
 
 
-
-
-
-
-
+/*
+ ****************************************************************
+ * ACTUAL TESTS
+ ****************************************************************/
 
 /*
  *==========================================================*
@@ -48,8 +54,6 @@ TEST(SxA_JsonBuffer, testSettingPath_setPathFuncMem)
     jbuf.setFilepath(jsonFilepath);
     EXPECT_EQ(jsonFilepath, jbuf.getPath());
 }
-
-
 
 
 /*
@@ -71,8 +75,6 @@ TEST(SxA_JsonBuffer, testReadingData_readFuncMem)
 }
 
 
-
-
 /*
  */
 TEST(SxA_JsonBuffer, testReadingData_iStreamOper)
@@ -84,8 +86,6 @@ TEST(SxA_JsonBuffer, testReadingData_iStreamOper)
 
     EXPECT_TRUE(expectedJsonEquals(jbuf.getData()));
 }
-
-
 
 
 /*

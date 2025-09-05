@@ -1,7 +1,7 @@
 ---
 Language: Cpp
 BasedOnStyle: Google
-ColumnLimit: 80
+ColumnLimit: 90
 MaxEmptyLinesToKeep: 8
 
 # INDENTATION
@@ -40,17 +40,24 @@ BraceWrapping:
     AfterEnum: false
     AfterStruct: false
 
-# SYNTAX ALIGNMENT
+# OPERATORS
 AlignConsecutiveAssignments:
     Enabled: true
     AlignCompound: true
+RemoveSemicolon: true
+
+
+# SWITCH/CASE STATEMENT FORMATTING
+AllowShortCaseExpressionOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
 AlignConsecutiveShortCaseStatements:
-    Enabled: true
-    AlignCaseColons: true
+  Enabled: true
+  AcrossComments: true
+  AlignCaseColons: true
+
+# MISCELLANEOUS
+FixNamespaceComments: false
+IncludeBlocks: Merge
 AlignTrailingComments:
     Kind: Always
     OverEmptyLines: 2
-
-# MISCELLANEOUS
-FixNamespaceComments: true
-RemoveSemicolon: true
