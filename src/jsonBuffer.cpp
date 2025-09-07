@@ -2,108 +2,61 @@
 
 using namespace std;
 
-namespace JNOVA
-{
-    // JSONBUFFER CONSTRUCTORS
+namespace JNOVA {
 
-    JsonBuffer::JsonBuffer() {}
+  JsonBuffer::JsonBuffer() {}
 
 
-
-    JsonBuffer::JsonBuffer(const string& jsonData)
-    : data(jsonData)
-    , view(jsonData)
-    {}
+  JsonBuffer::JsonBuffer(const string &jsonData)
+  : data(jsonData)
+  , view(jsonData)
+  {}
 
 
 
 
 
+  // JSONBUFFER LOGIC FUNCTION MEMBERS
+  void JsonBuffer::clear() noexcept
+  {
+    data.clear();
+    view = data;
+  }
 
 
 
-    // JSONBUFFER LOGIC FUNCTION MEMBERS
-    void JsonBuffer::clear() noexcept
-    {
-        data.clear();
-        view = data;
+  void JsonBuffer::read()
+  {
+    if (path == "") {
+      throw runtime_error("Stream failed. JsonBuffer doesn't have a filepath set.");
     }
 
-
-
-    void JsonBuffer::read()
-    {
-        if (path == "") {
-            throw runtime_error(
-              "In order for JsonBuffer to read a file, the file's path needs "
-              "to be set"
-            );
-        }
-
-        if (!fs::exists(path)) {
-            throw runtime_error(
-              "The file '" + string(path) + "' does not exist."
-            );
-        }
-
-        std::ifstream jsonFile(path, std::ios::binary);
-
-        if (!jsonFile.is_open()) {
-            throw runtime_error("Failed to open file: " + path.string());
-        }
-
-        char c;
-
-        while (jsonFile.get(c)) {
-            data += c;
-        }
-
-        if (jsonFile.bad() && !jsonFile.eof()) {
-            throw runtime_error("Fatal I/O error while reading file.");
-        }
-
-        if (jsonFile.fail() && !jsonFile.eof()) {
-            throw runtime_error(
-              "Failed to read entire file. This was likely do to an unexpected "
-              "encoding standard, or a an unexpected file type."
-            );
-        }
+    if (!fs::exists(path)) {
+      throw runtime_error("File does not exist.");
     }
 
+    std::ifstream jsonFile(path, std::ios::binary);
 
-
-
-
-
-
-
-    // JSONBUFFER ACCESSORS
-
-    void JsonBuffer::setFilepath(const string& jsonpath) noexcept
-    {
-        path = jsonpath;
+    if (!jsonFile.is_open()) {
+      throw runtime_error("Failed to open file.");
     }
 
+    char c;
 
-
-    const std::string_view JsonBuffer::viewData() const noexcept
-    {
-        return this->view;
+    while (jsonFile.get(c)) {
+      data += c;
     }
 
-
-
-    const std::string JsonBuffer::getPath() const noexcept
-    {
-        return this->path;
+    if (jsonFile.bad() && !jsonFile.eof()) {
+      throw runtime_error("Bad bit found. Possible corrupted data or system error.");
     }
 
-
-
-    const std::string JsonBuffer::getData() const noexcept
-    {
-        return this->data;
+    if (jsonFile.fail() && !jsonFile.eof()) {
+      throw runtime_error(
+       "Failed to read entire file. This was likely do to an unexpected "
+       "encoding standard, or a an unexpected file type.");
     }
+  }
 
 
 
@@ -112,22 +65,57 @@ namespace JNOVA
 
 
 
-    // JSONBUFFER OVERLOADED OPERATORS
+  // JSONBUFFER ACCESSORS
 
-    void operator>>(const fs::path& fpath, JsonBuffer& jbuff)
-    {
-        jbuff.setFilepath(fpath);
-        jbuff.read();
-    }
-
+  void JsonBuffer::setFilepath(const string &jsonpath) noexcept
+  {
+    path = jsonpath;
+  }
 
 
-    ostream& operator<<(ostream& os, JsonBuffer& jbuff)
-    {
-        os << jbuff.viewData();
 
-        return os;
-    }
+  const std::string_view JsonBuffer::viewData() const noexcept
+  {
+    return this->view;
+  }
 
 
-}  // namespace JNOVA
+
+  const std::string JsonBuffer::getPath() const noexcept
+  {
+    return this->path;
+  }
+
+
+
+  const std::string JsonBuffer::getData() const noexcept
+  {
+    return this->data;
+  }
+
+
+
+
+
+
+
+
+  // JSONBUFFER OVERLOADED OPERATORS
+
+  void operator>>(const fs::path &fpath, JsonBuffer &jbuff)
+  {
+    jbuff.setFilepath(fpath);
+    jbuff.read();
+  }
+
+
+
+  ostream &operator<<(ostream &os, JsonBuffer &jbuff)
+  {
+    os << jbuff.viewData();
+
+    return os;
+  }
+
+
+} // namespace JNOVA

@@ -1,59 +1,71 @@
 #pragma once
-
-#ifndef LEXER_HPP
-#define LEXER_HPP
+#pragma GCC diagnostic ignored "-Wunused-function"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 
 #include <json/buffer.hpp>
-#include <optional>
+#include <string>
+#include <string_view>
 #include <variant>
+#include <vector>
 
-using Number = std::variant<int, double>;
+
+
+
+
+using Number     = std::variant<int, double>;
+using string     = std::string;
+using TokenValue = std::variant<Number, string, char>;
+
+
+
+enum class TOKEN_TYPE {
+  // STRUCTURAL TOKENS
+  COLON,
+  COMMA,
+  CURLY_OPENED,
+  CURLY_CLOSED,
+  SQ_BRACKET_OPENED,
+  SQ_BRACKET_CLOSED,
+
+  // LITERAL TOKENS
+  LITERAL_TRUE,
+  LITERAL_NULL,
+  LITERAL_FALSE,
+
+  // Dynamic JSON Value Tokens
+  VALUE_STRING,
+  VALUE_NUMBER,
+
+  // WHITESPACE TOKENS
+  WS_NEWLINE,
+  WS_SPACE // Tabs should be converted to WS_SPACE
+};
+
+
+
+
 
 namespace JNOVA
 {
-    namespace
-    {
-        using Number = std::variant<int, double>;
+  class LexicalAnalyzer
+  {
+    struct Token {
+      TOKEN_TYPE type;
+      TokenValue value;
 
-        enum class STRUCT_TOK_TYPE {
-            CURLY_OPEN,
-            CURLY_CLOSE,
-            SQ_OPEN,
-            SQ_CLOSE,
-            COLON,
-            COMMA
-        };
-
-        enum class LIT_TOK_TYPE { _TRUE, _FALSE, _NULL };
-        enum class VAL_TOK_TYPE { NUMBER, STRING };
-
-        template <typename T>
-        struct Token {
-            const std::string id;
-            const std::string type;
-            T value;
-        };
-    }
-
-
-
-    std::optional<STRUCT_TOK_TYPE> ch_to_structTokType(char c);
-    std::optional<LIT_TOK_TYPE> ch_to_litTokType(char c);
-    std::optional<VAL_TOK_TYPE> ch_to_valTokType(char c);
-
-    std::optional<const char> ch_from_structTokType(STRUCT_TOK_TYPE structuralType);
-    std::optional<const std::string> ch_from_litTokType(LIT_TOK_TYPE literalType);
-    std::optional<const std::string> ch_from_valTokType(VAL_TOK_TYPE valueType);
-
-    // LIT_TOK_TYPE
-    // VAL_TOK_TYPE
-
-    class Parser {
-        JsonBuffer json;
-
-      public:
-        Parser(const JsonBuffer& json);
+      const unsigned int size;
+      const unsigned int row;
+      const unsigned int col;
     };
-}
 
-#endif
+    std::vector<Token> tokens;
+
+    public:
+    LexicalAnalyzer(JsonBuffer json);
+
+    void TokenGenerator(TOKEN_TYPE type, TokenValue value);
+  };
+
+
+
+}

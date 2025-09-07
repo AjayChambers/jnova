@@ -1,51 +1,58 @@
 ---
 Language: Cpp
-BasedOnStyle: Google
-ColumnLimit: 90
-MaxEmptyLinesToKeep: 8
+BasedOnStyle: Microsoft
+ColumnLimit: 85
+MaxEmptyLinesToKeep: 10
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterClass: true
+  AfterFunction: true
+  AfterStruct: false
+  AfterEnum: false
+  AfterNamespace: false
+  BeforeCatch: false 
+  BeforeElse: false
+  BeforeLambdaBody: false
+  AfterControlStatement: Never
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
 
 # INDENTATION
-IndentWidth: 4
-AccessModifierOffset: -2
-ContinuationIndentWidth: 2
+IndentWidth: 2
+AccessModifierOffset: 0
+ContinuationIndentWidth: 1
 BracedInitializerIndentWidth: 1
 ConstructorInitializerIndentWidth: 0
-NamespaceIndentation: All
+NamespaceIndentation: All # ( All | None | Inner )
 UseTab: Never
 
 # STRING FORMATTING STYLE
-AlwaysBreakBeforeMultilineStrings: true
+AlwaysBreakBeforeMultilineStrings: false
 BreakAdjacentStringLiterals: true
 BreakStringLiterals: true
 
 # FUNCTION FORMATTING
-BreakAfterReturnType: None
-AlignAfterOpenBracket: BlockIndent
-AllowAllArgumentsOnNextLine: true
+AlignAfterOpenBracket: AlwaysBreak
+BinPackArguments: false
+BinPackParameters: OnePerLine
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
 AllowShortFunctionsOnASingleLine: Inline
+BreakAfterReturnType: None
+# BreakFunctionDefinitionParameters: true
+
 # CONSTRUCTOR STYLE
 BreakInheritanceList: BeforeColon
 BreakConstructorInitializers: BeforeComma
 PackConstructorInitializers: Never
 
-# BRACE WRAPPING
-BreakBeforeBraces: Custom
-BraceWrapping:
-    AfterClass: false
-    AfterFunction: true
-    AfterNamespace: true
-    SplitEmptyFunction: false 
-    SplitEmptyRecord: false
-    SplitEmptyNamespace: false
-    AfterEnum: false
-    AfterStruct: false
-
 # OPERATORS
-AlignConsecutiveAssignments:
-    Enabled: true
-    AlignCompound: true
+AlignConsecutiveAssignments: AcrossComments
+BreakBeforeTernaryOperators: true
+BreakBeforeBinaryOperators: All
+BreakBinaryOperations: OnePerLine
 RemoveSemicolon: true
-
 
 # SWITCH/CASE STATEMENT FORMATTING
 AllowShortCaseExpressionOnASingleLine: true
@@ -57,7 +64,9 @@ AlignConsecutiveShortCaseStatements:
 
 # MISCELLANEOUS
 FixNamespaceComments: false
+Cpp11BracedListStyle: true
 IncludeBlocks: Merge
+BreakTemplateDeclarations: true
 AlignTrailingComments:
     Kind: Always
     OverEmptyLines: 2

@@ -13,12 +13,26 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see 'https://www.gnu.org/licenses/'.
- * 
+ *
  * --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
- * 
+ *
  * source: "src/jnova.lib.cpp"
- * author: "Andrew Chambers" 
+ * author: "Andrew Chambers"
  * email:  "w3dojo@gmail.com"
  * repo:   "https://GitHub.com/AjayChambers/jnova.git"
  * desc:   "Definitions for JNova library functions."
  **************************************************************************/
+
+#include <filesystem>
+#include <string>
+
+namespace fs = std::filesystem;
+
+using namespace std;
+
+string foo()
+{
+    const std::string foofoo = "foofoo";
+
+    return "foofoo";
+}

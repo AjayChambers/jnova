@@ -12,6 +12,7 @@
 
 #include <filesystem>
 #include <fstream>
+#include <format>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -21,35 +22,35 @@
 namespace fs = std::filesystem;
 
 
-namespace JNOVA
+namespace JNOVA {
+class JsonBuffer
 {
-    class JsonBuffer {
-        fs::path path         = "";
-        std::string data      = "";
-        std::string_view view = "";
+    fs::path path         = "";
+    std::string data      = "";
+    std::string_view view = "";
 
-      public:
-        // Constructors
-        JsonBuffer();
-        JsonBuffer(const std::string& jsonData);
-        JsonBuffer(const JsonBuffer& rval);
+  public:
+    // Constructors
+    JsonBuffer();
+    JsonBuffer(const std::string &jsonData);
+    JsonBuffer(const JsonBuffer &rval);
 
-        // Function Members
-        void read();
-        void clear() noexcept;
+    // Function Members
+    void read();
+    void clear() noexcept;
 
-        // Accessors & Mutators
-        void setFilepath(const std::string& jsonpath) noexcept;
-        void setData(const std::string& jsonData) noexcept;
+    // Accessors & Mutators
+    void setFilepath(const std::string &jsonpath) noexcept;
+    void setData(const std::string &jsonData) noexcept;
 
-        const std::string getPath() const noexcept;
-        const std::string getData() const noexcept;
-        const std::string_view viewData() const noexcept;
+    const std::string getPath() const noexcept;
+    const std::string getData() const noexcept;
+    const std::string_view viewData() const noexcept;
 
-        JsonBuffer operator=(JsonBuffer& rightside);
+    JsonBuffer operator=(JsonBuffer &rightside);
 
-        friend void operator>>(const fs::path& is, JsonBuffer& jbuff);
-        friend std::ostream& operator<<(std::ostream& os, JsonBuffer& jbuff);
-    };
-}  // namespace JNOVA
+    friend void operator>>(const fs::path &is, JsonBuffer &jbuff);
+    friend std::ostream &operator<<(std::ostream &os, JsonBuffer &jbuff);
+};
+} // namespace JNOVA
 #endif
