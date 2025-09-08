@@ -47,9 +47,7 @@ TEST(SxA_JsonBuffer, testSettingPath_setPathFuncMem)
 
     JsonBuffer jbuff;
 
-    const string filepath = JSON_LEXER_TEST_DATA;
-
-    jbuff.setFilepath(filepath);
+    jbuff.setFilepath(JSON_LEXER_TEST_DATA);
     jbuff.read();
 
     const string actualJson = jbuff.getData();
