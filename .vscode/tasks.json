@@ -1,160 +1,168 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "DEV BUILD | BUILD ALL 🏗️",
-            "detail": "Delete old build. Reinitialize project. Build new build.",
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "DEV BUILD | DISCARD ACTIVE BUILD 🧹",
-                "DEV BUILD | INITIALIZE PRESETS ⚙️",
-                "DEV BUILD | BUILD CHANGES 🔨"
-            ],
-            "presentation": {
-                "group": "build",
-                "reveal": "never",
-                "echo": false
-            },
-            "icon": {
-                "color": "terminal.ansiGreen",
-                "id": "debug-rerun"
-            }
-        },
-        
-        {
-            "label": "DEV BUILD | BUILD CHANGES 🔨",
-            "detail": "Builds all (and only all) files that have been changed.",
-            "type": "shell",
-            "problemMatcher": "$gcc",
-            "command": "cmake",
-            "args": ["--build", "--preset", "dev-build"],
-            "presentation": {
-                "group": "build",
-                "panel": "new",
-                "revealProblems": "onProblem",
-                "showReuseMessage": false
-            },
-            "icon": {
-                "color": "terminal.ansiGreen",
-                "id": "debug-rerun"
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            }
-        },
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "DEV BUILD | BUILD ALL 🏗️",
+      "detail": "Delete old build. Reinitialize project. Build new build.",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "DEV BUILD | DISCARD ACTIVE BUILD 🧹",
+        "DEV BUILD | INITIALIZE PRESETS ⚙️",
+        "DEV BUILD | BUILD CHANGES 🔨"
+      ],
+      "presentation": {
+        "group": "build",
+        "reveal": "never",
+        "echo": false
+      },
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "debug-rerun"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
 
-        {
-            "label": "DEV BUILD | INITIALIZE PRESETS ⚙️",
-            "detail": "Reinitialize project generator, caches, and build config",
-            "problemMatcher": "$gcc",
-            "dependsOrder": "sequence",
-            "dependsOn": ["DEV BUILD | INIT CMD ECHO", "DEV BUILD | INIT CMD"],
-            "presentation": {
-                "group": "init",
-                "reveal": "never",
-                "showReuseMessage": false,
-                "echo": false
-            },
-            "icon": {
-                "color": "terminal.ansiGreen",
-                "id": "debug-rerun"
-            }
-        },
+    {
+      "label": "DEV BUILD | BUILD CHANGES 🔨",
+      "detail": "Builds all (and only all) files that have been changed.",
+      "type": "shell",
+      "problemMatcher": "$gcc",
+      "command": "cmake",
+      "args": ["--build", "--preset", "dev-build"],
+      "presentation": {
+        "group": "build",
+        "panel": "dedicated",
+        "revealProblems": "onProblem",
+        "showReuseMessage": false
+      },
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "debug-rerun"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
 
-        {
-            "label": "DEV BUILD | DISCARD ACTIVE BUILD 🧹",
-            "detail": "DISCARD BUILD & RESET CACHES",
-            "dependsOrder": "sequence",
-            "dependsOn": ["DEV BUILD | TIDY CMD ECHO", "DEV BUILD | TIDY CMD"],
-            "problemMatcher": [],
-            "presentation": {
-                "group": "clean",
-                "reveal": "never",
-                "showReuseMessage": false,
-                "echo": false
-            },
-            "icon": {
-                "color": "terminal.ansiGreen",
-                "id": "debug-rerun"
-            }
-        },
+    {
+      "label": "DEV BUILD | INITIALIZE PRESETS ⚙️",
+      "detail": "Reinitialize project generator, caches, and build config",
+      "problemMatcher": "$gcc",
+      "dependsOrder": "sequence",
+      "dependsOn": ["DEV BUILD | INIT CMD ECHO", "DEV BUILD | INIT CMD"],
+      "presentation": {
+        "group": "init",
+        "reveal": "never",
+        "showReuseMessage": false,
+        "echo": false
+      },
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "debug-rerun"
+      }
+    },
 
-        {
-            "hide": true, // HIDDEN
-            "label": "DEV BUILD | INIT CMD",
-            "type": "shell",
-            "command": "cmake",
-            "args": ["--preset", "dev-build"],
-            "group": "build",
-            "presentation": {
-                "group": "init",
-                "revealProblems": "onProblem",
-                "showReuseMessage": false
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": "$gcc"
-        },
+    {
+      "label": "DEV BUILD | DISCARD ACTIVE BUILD 🧹",
+      "detail": "DISCARD BUILD & RESET CACHES",
+      "dependsOrder": "sequence",
+      "dependsOn": ["DEV BUILD | TIDY CMD ECHO", "DEV BUILD | TIDY CMD"],
+      "problemMatcher": [],
+      "presentation": {
+        "group": "clean",
+        "reveal": "never",
+        "showReuseMessage": false,
+        "echo": false
+      },
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "debug-rerun"
+      }
+    },
 
-        {
-            "hide": true, // HIDDEN
-            "label": "DEV BUILD | INIT CMD ECHO",
-            "command": "echo",
-            "args": [
-                "-e",
-                "\n\nEXECUTING TASK: 'PROJECT INITIALIZATION ⚙️'\n\t- Attempting to initialize project...\n\n"
-            ],
-            "presentation": {
-                "group": "init",
-                "reveal": "always",
-                "echo": false,
-                "clear": true,
-                "showReuseMessage": false
-            },
-            "problemMatcher": []
-        },
+    {
+      "hide": true, // HIDDEN
+      "label": "DEV BUILD | INIT CMD",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--preset", "dev-build"],
+      "group": "build",
+      "presentation": {
+        "group": "init",
+        "revealProblems": "onProblem",
+        "showReuseMessage": false
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$gcc"
+    },
 
-        {
-            "hide": true, // HIDDEN
-            "label": "DEV BUILD | TIDY CMD",
-            "command": "rm",
-            "type": "shell",
-            "args": [
-                "-Rfv",
-                "${workspaceFolder}/build/dev",
-                "${workspaceFolder}/build/CMakeFiles",
-                "${workspaceFolder}/build/CMakeCache.txt",
-                "${workspaceFolder}/CMakeFiles",
-                "${workspaceFolder}/CMakeCache.txt"
-            ],
-            "presentation": {
-                "group": "clean",
-                "revealProblems": "onProblem",
-                "showReuseMessage": false
-            },
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": []
-        },
+    {
+      "hide": true, // HIDDEN
+      "label": "DEV BUILD | INIT CMD ECHO",
+      "command": "echo",
+      "args": [
+        "-e",
+        "\n\nEXECUTING TASK: 'PROJECT INITIALIZATION ⚙️'\n\t- Attempting to initialize project...\n\n"
+      ],
+      "presentation": {
+        "group": "init",
+        "reveal": "always",
+        "echo": false,
+        "clear": true,
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    },
 
-        {
-            "hide": true, // HIDDEN
-            "label": "DEV BUILD | TIDY CMD ECHO",
-            "command": "echo",
-            "args": [
-                "-e",
-                "\n\nEXECUTING TASK: 'PROJECT INITIALIZATION ⚙️'\n\t- Attempting to initialize project...\n\n"
-            ],
-            "presentation": {
-                "group": "clean",
-                "reveal": "always",
-                "echo": false,
-                "clear": true,
-                "showReuseMessage": false
-            },
-            "problemMatcher": []
-        }
-    ]
+    {
+      "hide": true, // HIDDEN
+      "label": "DEV BUILD | TIDY CMD",
+      "command": "rm",
+      "type": "shell",
+      "args": [
+        "-Rfv",
+        "${workspaceFolder}/build/dev",
+        "${workspaceFolder}/build/CMakeFiles",
+        "${workspaceFolder}/build/CMakeCache.txt",
+        "${workspaceFolder}/CMakeFiles",
+        "${workspaceFolder}/CMakeCache.txt"
+      ],
+      "presentation": {
+        "group": "clean",
+        "revealProblems": "onProblem",
+        "showReuseMessage": false
+      },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+
+    {
+      "hide": true, // HIDDEN
+      "label": "DEV BUILD | TIDY CMD ECHO",
+      "command": "echo",
+      "args": [
+        "-e",
+        "\n\nEXECUTING TASK: 'PROJECT INITIALIZATION ⚙️'\n\t- Attempting to initialize project...\n\n"
+      ],
+      "presentation": {
+        "group": "clean",
+        "reveal": "always",
+        "echo": false,
+        "clear": true,
+        "showReuseMessage": false
+      },
+      "problemMatcher": []
+    }
+  ]
 }
