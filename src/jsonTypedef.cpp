@@ -1,5 +1,8 @@
 #include <json/typedef.hpp>
 
+#pragma GCC diagnostic ignored "-Wunused-function"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+
 using namespace std;
 
 

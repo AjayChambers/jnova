@@ -1,67 +1,93 @@
 #pragma once
-#pragma GCC diagnostic ignored "-Wunused-function"
-#pragma GCC diagnostic ignored "-Wunused-parameter"
 
+#ifndef LEXER_HPP
+#define LEXER_HPP
+
+#include <iostream>
 #include <json/buffer.hpp>
+#include <memory>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <variant>
 #include <vector>
 
+using namespace std;
 
-using Number     = std::variant<int, double>;
-using string     = std::string;
-using TokenValue = std::variant<Number, string, char>;
+using Number     = variant<int, double>;
+using TokenValue = variant<Number, string, char>;
 
-
-
-enum class TOKEN_TYPE {
-  // STRUCTURAL TOKENS
-  COLON,
-  COMMA,
-  CURLY_OPENED,
-  CURLY_CLOSED,
-  SQ_BRACKET_OPENED,
-  SQ_BRACKET_CLOSED,
-
-  // LITERAL TOKENS
-  LITERAL_TRUE,
-  LITERAL_NULL,
-  LITERAL_FALSE,
-
-  // Dynamic JSON Value Tokens
-  VALUE_STRING,
-  VALUE_NUMBER,
-
-  // WHITESPACE TOKENS
-  WS_NEWLINE,
-  WS_SPACE // Tabs should be converted to WS_SPACE
+enum class TokenType {
+    Curly_Brace_Opened, // <- Curly Brace Opened
+    Curly_Brace_Closed, // <- Curly Brace Closed
+    Sq_Bracket_Opened,  // <- Square Bracket Opened
+    Sq_Bracket_Closed,  // <- Square Bracket Closed
+    Comma,              // <- Comma
+    Colon,              // <- Colon
+    String,             // <- Dynamic String Value
+    Number,             // <- Dynamic Number Value
+    Null_Literal,       // <- Null Literal
+    True_Literal,       // <- True Literal
+    False_Literal,      // <- False Literal
+    Newline,            // <- Whitespace Linebreak
+    Space,              // <- Whitespace Space
+    Tab
 };
 
 
 
 
 
-namespace JNOVA {
-  class LexicalAnalyzer
-  {
-    struct Token {
-      TOKEN_TYPE type;
-      TokenValue value;
 
-      const unsigned int size;
-      const unsigned int row;
-      const unsigned int col;
+// [CTRL] + [SHIFT] + [B]
+
+namespace JNOVA {
+    struct Token {
+        const TokenType type;
+        const TokenValue value;
+
+        unsigned int row;
+        unsigned int col;
+
+      public:
+        Token(
+          const TokenType &type,
+          const TokenValue &val,
+          unsigned int row,
+          unsigned int col);
+
+        void setRow(unsigned int row);
+        void setCol(unsigned int col);
+
+        unsigned int getRow() const noexcept;
+        unsigned int getCol() const noexcept;
     };
 
-    std::vector<Token> tokens;
+    class Tokenizer
+    {
+        std::vector<Token> tokens;
 
-    public:
-    LexicalAnalyzer(JsonBuffer json);
+      public:
+        Tokenizer();
+        Tokenizer(JsonBuffer json);
 
-    void TokenGenerator(TOKEN_TYPE type, TokenValue value);
-  };
+        auto tokenFactory(
+          TokenType type,
+          TokenValue value,
+          unsigned int row,
+          unsigned int col);
+    };
+
+
+    optional<string> toString(TokenType type);
 
 
 
 }
+
+
+
+
+
+
+#endif

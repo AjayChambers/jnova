@@ -31,10 +31,4 @@ struct Json : JsonType {
 
 using JsonType = std::variant<Num_J, Str_J, Bool_J, Null_J, Arr_J, Obj_J>;
 
-
-// template <typename T, typename... Args>
-// unique_ptr<T> make_unique(Args &&...args);
-
-
-
 #endif
