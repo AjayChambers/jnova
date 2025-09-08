@@ -3,45 +3,38 @@
 #ifndef JSON_TYPE_HPP
 #define JSON_TYPE_HPP
 
+#include <iostream>
 #include <map>
 #include <string>
 #include <variant>
 #include <vector>
 
-struct Json; // forward declare
+struct Json;
 
-using Num       = std::variant<int, double>;
-using Str       = std::string;
-using Bool      = bool;
-using Null      = std::nullptr_t;
-using JsonArray = std::vector<Json>;
-using JsonObj   = std::map<std::string, Json>;
-
-using JsonType = std::variant<Num, Str, Bool, Null, JsonArray, JsonObj>;
+using Num_J    = std::variant<int, double>;
+using Str_J    = std::string;
+using Bool_J   = bool;
+using Null_J   = std::nullptr_t;
+using Arr_J    = std::vector<Json>;
+using Obj_J    = std::map<std::string, Json>;
+using JsonType = std::variant<Num_J, Str_J, Bool_J, Null_J, Arr_J, Obj_J>;
 
 struct Json : JsonType {
-  using JsonType::JsonType;
+    using JsonType::JsonType;
 
-  Json(const JsonArray &arr)
-  : JsonType(arr)
-  {}
-
-  Json(JsonArray &&arr)
-  : JsonType(std::move(arr))
-  {}
-
-  Json(const JsonObj &obj)
-  : JsonType(obj)
-  {}
-
-  Json(JsonObj &&obj)
-  : JsonType(std::move(obj))
-  {}
-
-  Json(std::initializer_list<std::pair<const std::string, Json>> init)
-  : JsonType(JsonObj(init))
-  {}
+    Json(const Arr_J &arr);
+    Json(Arr_J &&arr);
+    Json(const Obj_J &obj);
+    Json(Obj_J &&obj);
+    Json(std::initializer_list<std::pair<const std::string, Json>> init);
 };
+
+using JsonType = std::variant<Num_J, Str_J, Bool_J, Null_J, Arr_J, Obj_J>;
+
+
+// template <typename T, typename... Args>
+// unique_ptr<T> make_unique(Args &&...args);
+
 
 
 #endif

@@ -1,8 +1,8 @@
 ---
 Language: Cpp
 BasedOnStyle: Microsoft
-ColumnLimit: 85
-MaxEmptyLinesToKeep: 10
+ColumnLimit: 90
+MaxEmptyLinesToKeep: 16
 BreakBeforeBraces: Custom
 BraceWrapping:
   AfterClass: true
@@ -19,12 +19,12 @@ BraceWrapping:
   SplitEmptyNamespace: false
 
 # INDENTATION
-IndentWidth: 2
-AccessModifierOffset: 0
-ContinuationIndentWidth: 1
-BracedInitializerIndentWidth: 1
+IndentWidth: 4
+AccessModifierOffset: 4
+ContinuationIndentWidth: 2
+BracedInitializerIndentWidth: 2
 ConstructorInitializerIndentWidth: 0
-NamespaceIndentation: All # ( All | None | Inner )
+NamespaceIndentation: All
 UseTab: Never
 
 # STRING FORMATTING STYLE

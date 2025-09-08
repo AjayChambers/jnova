@@ -1,246 +1,160 @@
 {
     "version": "2.0.0",
     "tasks": [
-        /*
-
-
-
-
-
-
-        
-        *---------------------------------------------*
-         *> BUILD TASKS
-        *---------------------------------------------*/
         {
-            "hide": false,
-            "label": "FRESH BUILD ✨",
+            "label": "DEV BUILD | BUILD ALL 🏗️",
             "detail": "Delete old build. Reinitialize project. Build new build.",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "CLEAN OUT COBWEBS 🕸️🧹",
-                "REINITIALIZE PROJECT 🔃",
-                "UPDATE BUILD 🛠️"
+                "DEV BUILD | DISCARD ACTIVE BUILD 🧹",
+                "DEV BUILD | INITIALIZE PRESETS ⚙️",
+                "DEV BUILD | BUILD CHANGES 🔨"
             ],
-            "problemMatcher": ["$gcc"],
             "presentation": {
                 "group": "build",
-                "reveal": "always",
-                "panel": "shared",
-                "revealProblems": "onProblem",
-                "showReuseMessage": false,
-                "echo": false,
-                "focus": false,
-                "clear": false
+                "reveal": "never",
+                "echo": false
             },
             "icon": {
-                "color": "terminal.ansiYellow",
-                "id": "tools"
+                "color": "terminal.ansiGreen",
+                "id": "debug-rerun"
             }
         },
+        
         {
-            "hide": false,
-            "label": "UPDATE BUILD 🛠️",
+            "label": "DEV BUILD | BUILD CHANGES 🔨",
             "detail": "Builds all (and only all) files that have been changed.",
             "type": "shell",
+            "problemMatcher": "$gcc",
             "command": "cmake",
-            "args": ["--build", "${workspaceFolder}/build"],
-            "problemMatcher": ["$gcc"],
+            "args": ["--build", "--preset", "dev-build"],
             "presentation": {
                 "group": "build",
-                "reveal": "always",
-                "panel": "dedicated",
+                "panel": "new",
                 "revealProblems": "onProblem",
-                "showReuseMessage": false,
-                "echo": true,
-                "focus": true,
-                "clear": true
+                "showReuseMessage": false
             },
             "icon": {
-                "color": "terminal.ansiBlue",
-                "id": "tools"
+                "color": "terminal.ansiGreen",
+                "id": "debug-rerun"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
             }
         },
 
-        /*
-
-
-
-
-
-
-
-        *---------------------------------------------*
-         *> PROJECT REINITIALIZATION
-        *---------------------------------------------*/
         {
-            // MENU DISPLAYED TASK: 'REINITIALIZE PROJECT'
-            "hide": false,
-            "label": "REINITIALIZE PROJECT 🔃",
+            "label": "DEV BUILD | INITIALIZE PRESETS ⚙️",
             "detail": "Reinitialize project generator, caches, and build config",
+            "problemMatcher": "$gcc",
             "dependsOrder": "sequence",
-            "dependsOn": [
-                "ECHO: REINITIALIZING PROJECT",
-                "PROJECT INITIALIZATION"
-            ],
-            "problemMatcher": ["$gcc"],
+            "dependsOn": ["DEV BUILD | INIT CMD ECHO", "DEV BUILD | INIT CMD"],
             "presentation": {
                 "group": "init",
                 "reveal": "never",
-                "panel": "shared",
-                "revealProblems": "onProblem",
                 "showReuseMessage": false,
-                "echo": false,
-                "focus": false,
-                "clear": false
+                "echo": false
             },
             "icon": {
-                "color": "terminal.ansiCyan",
-                "id": "compare-changes"
+                "color": "terminal.ansiGreen",
+                "id": "debug-rerun"
             }
         },
+
         {
-            // HIDDEN DEPENDANCY: 'REINITIALIZE PROJECT'
-            "hide": true,
-            "label": "PROJECT INITIALIZATION",
+            "label": "DEV BUILD | DISCARD ACTIVE BUILD 🧹",
+            "detail": "DISCARD BUILD & RESET CACHES",
+            "dependsOrder": "sequence",
+            "dependsOn": ["DEV BUILD | TIDY CMD ECHO", "DEV BUILD | TIDY CMD"],
+            "problemMatcher": [],
+            "presentation": {
+                "group": "clean",
+                "reveal": "never",
+                "showReuseMessage": false,
+                "echo": false
+            },
+            "icon": {
+                "color": "terminal.ansiGreen",
+                "id": "debug-rerun"
+            }
+        },
+
+        {
+            "hide": true, // HIDDEN
+            "label": "DEV BUILD | INIT CMD",
             "type": "shell",
             "command": "cmake",
-            "args": [
-                "-G",
-                "Unix Makefiles",
-                "-D",
-                "CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make",
-                "-S",
-                "${workspaceFolder}/.",
-                "-B",
-                "${workspaceFolder}/build",
-                "-DCMAKE_BUILD_TYPE=Debug",
-                "-DCMAKE_COLOR_DIAGNOSTICS=ON",
-                "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
-                "-DCMAKE_CXX_COMPILER=/usr/bin/g++"
-            ],
+            "args": ["--preset", "dev-build"],
             "group": "build",
-            "problemMatcher": ["$gcc"],
             "presentation": {
                 "group": "init",
-                "reveal": "never",
-                "panel": "shared",
                 "revealProblems": "onProblem",
-                "showReuseMessage": false,
-                "echo": true,
-                "focus": false,
-                "clear": false
+                "showReuseMessage": false
             },
-            "icon": {
-                "color": "terminal.ansiCyan",
-                "id": "compare-changes"
-            }
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": "$gcc"
         },
+
         {
-            // HIDDEN DEPENDANCY: 'REINITIALIZE PROJECT'
-            "hide": true,
-            "label": "ECHO: REINITIALIZING PROJECT",
+            "hide": true, // HIDDEN
+            "label": "DEV BUILD | INIT CMD ECHO",
             "command": "echo",
             "args": [
-                "EXECUTING TASK:\n\t🔃 Reinitializing build generator, build configuration,\n\tbuild directory and source directory..."
+                "-e",
+                "\n\nEXECUTING TASK: 'PROJECT INITIALIZATION ⚙️'\n\t- Attempting to initialize project...\n\n"
             ],
-            "problemMatcher": ["$gcc"],
             "presentation": {
                 "group": "init",
                 "reveal": "always",
-                "panel": "shared",
-                "revealProblems": "onProblem",
-                "showReuseMessage": false,
                 "echo": false,
-                "focus": false,
-                "clear": false
-            },
-            "icon": {
-                "color": "terminal.ansiCyan",
-                "id": "compare-changes"
-            }
-        },
-        /*
-
-
-
-
-
-
-        
-        *---------------------------------------------*
-         *> CLEAN OUT ARTIFACTS
-        *---------------------------------------------*/
-        {
-            // MENU DISPLAYED TASK: 'CLEAN OUT COBWEBS 🧹'
-            "hide": false,
-            "label": "CLEAN OUT COBWEBS 🕸️🧹",
-            "detail": "Delete old build files and clean out CMake caches.",
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "ECHO: DELETE OLD BUILD & CACHES",
-                "DELETE OLD BUILD & CACHES"
-            ],
-            "problemMatcher": [],
-            "presentation": {
-                "group": "cleanout",
-                "reveal": "never",
-                "panel": "shared",
-                "showReuseMessage": false,
-                "echo": false,
-                "focus": false,
-                "clear": false
-            },
-            "icon": {
-                "color": "terminal.ansiRed",
-                "id": "trash"
-            }
-        },
-        {
-            // HIDDEN DEPENDENCY: 'CLEAN OUT COBWEBS 🕸️🧹'
-            "hide": true,
-            "label": "ECHO: DELETE OLD BUILD & CACHES",
-            "command": "echo",
-            "args": ["!>  🧹 Cleaning previous build artifacts..."],
-            "problemMatcher": [],
-            "presentation": {
-                "echo": false,
-                "reveal": "always",
-                "panel": "shared",
-                "showReuseMessage": false,
                 "clear": true,
-                "group": "cleanout"
+                "showReuseMessage": false
             },
-            "icon": {
-                "color": "terminal.ansiRed",
-                "id": "trash"
-            }
+            "problemMatcher": []
         },
+
         {
-            // HIDDEN DEPENDENCY: 'CLEAN OUT COBWEBS 🕸️🧹'
-            "hide": true,
-            "label": "DELETE OLD BUILD & CACHES",
+            "hide": true, // HIDDEN
+            "label": "DEV BUILD | TIDY CMD",
             "command": "rm",
+            "type": "shell",
             "args": [
-                "-Rf",
-                "${workspaceFolder}/build",
+                "-Rfv",
+                "${workspaceFolder}/build/dev",
+                "${workspaceFolder}/build/CMakeFiles",
+                "${workspaceFolder}/build/CMakeCache.txt",
                 "${workspaceFolder}/CMakeFiles",
                 "${workspaceFolder}/CMakeCache.txt"
             ],
-            "problemMatcher": [],
             "presentation": {
-                "echo": true,
-                "reveal": "never",
-                "focus": false,
-                "panel": "shared",
-                "showReuseMessage": false,
-                "clear": false,
-                "group": "cleanout"
+                "group": "clean",
+                "revealProblems": "onProblem",
+                "showReuseMessage": false
             },
-            "icon": {
-                "color": "terminal.ansiRed",
-                "id": "trash"
-            }
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+
+        {
+            "hide": true, // HIDDEN
+            "label": "DEV BUILD | TIDY CMD ECHO",
+            "command": "echo",
+            "args": [
+                "-e",
+                "\n\nEXECUTING TASK: 'PROJECT INITIALIZATION ⚙️'\n\t- Attempting to initialize project...\n\n"
+            ],
+            "presentation": {
+                "group": "clean",
+                "reveal": "always",
+                "echo": false,
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
         }
     ]
 }

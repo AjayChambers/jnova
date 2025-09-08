@@ -1,7 +1,0 @@
-function(logger msg)
-    message(STATUS "")
-    message(STATUS "")
-    message(STATUS " LOGGER:\n--\t  ${msg}")
-    message(STATUS "")
-    message(STATUS "")
-endfunction()

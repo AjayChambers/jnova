@@ -9,9 +9,6 @@
 #include <vector>
 
 
-
-
-
 using Number     = std::variant<int, double>;
 using string     = std::string;
 using TokenValue = std::variant<Number, string, char>;
@@ -45,8 +42,7 @@ enum class TOKEN_TYPE {
 
 
 
-namespace JNOVA
-{
+namespace JNOVA {
   class LexicalAnalyzer
   {
     struct Token {

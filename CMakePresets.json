@@ -1,0 +1,66 @@
+{
+    "version": 10,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 31,
+        "patch": 6
+    },
+    
+    "configurePresets": [
+        {
+            "name": "latest-release-build",
+            "displayName": "Latest Release",
+            "description": "Latest released version of JNOVA.",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/latest",
+            "trace": { "mode": "off" },
+            "debug": { "output": false },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+                "CMAKE_MAKE_PROGRAM": "/usr/bin/make"
+            }
+        },
+        {
+            "name": "dev-build",
+            "displayName": "Development Build",
+            "description": "Non-release ver for debugging, refactoring, and development",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/dev",
+            "warnings": { "dev": false },
+            "debug": { "output": true },
+            "trace": {
+                "mode": "on",
+                "format": "human",
+                "source": ["CMakeLists.txt"]
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_COLOR_DIAGNOSTICS": "ON",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+                "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+                "CMAKE_MAKE_PROGRAM": "/usr/bin/make"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "dev-build",
+            "configurePreset": "dev-build",
+            "displayName": "Development Build",
+            "description": "Non-release ver for debugging, refactoring, and development",
+            "jobs": 16,
+            "verbose": true,
+            "cleanFirst": false
+        },
+        {
+            "name": "latest-release-build",
+            "configurePreset": "latest-release-build",
+            "displayName": "Latest Release",
+            "description": "Latest released version of JNOVA.",
+            "jobs": 10,
+            "verbose": false,
+            "cleanFirst": true
+        }
+    ]
+}

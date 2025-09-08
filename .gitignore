@@ -1,21 +1,11 @@
-# DEVELOPERS PERSONAL FILES
-Dev/
-docs/
+# Ignore build files, but keep root build dirs 
+build/dev/*
+build/latest/*
+
+# Ignore Tests for now
+tests/data
 
 # VS Code
 .vscode/settings.json
 .vscode/launch.json
 .vscode/c_cpp_properties.json
-# CMake
-CMakeLists.txt.user
-CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-_deps
-CMakeUserPresets.json
