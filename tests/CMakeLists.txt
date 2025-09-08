@@ -55,7 +55,7 @@ target_link_libraries(
 )
 
 set(JSON_LEXER_TEST_DATA "${CMAKE_SOURCE_DIR}/tests/data/JsonLexer.test.json")
-target_compile_definitions(JsonBufferTest PUBLIC JSON_LEXER_TEST_DATA=\"${JSON_LEXER_TEST_DATA}\")
+target_compile_definitions(JsonLexerTest PUBLIC JSON_LEXER_TEST_DATA=\"${JSON_LEXER_TEST_DATA}\")
 file(WRITE ${JSON_LEXER_TEST_DATA}
     "{\n"
     "  \"object\": {\n"

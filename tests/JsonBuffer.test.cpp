@@ -6,6 +6,7 @@
 #include <gtest/gtest.h>
 #include <json/buffer.hpp>
 
+
 using namespace std;
 using namespace JNOVA;
 
@@ -16,7 +17,6 @@ using namespace JNOVA;
  ****************************************************************
  * TEST HELPER FUNCTIONS
  ****************************************************************/
-
 bool expectedJsonEquals(const string &actualJson)
 {
     string expectedJson = "{\n"
