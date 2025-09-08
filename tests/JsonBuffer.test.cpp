@@ -1,10 +1,9 @@
-#ifndef TEST_JSON_PATH
-#define TEST_JSON_PATH ""  // Satisfies Intellisense
+#ifndef JSON_BUFFER_TEST_DATA
+#define JSON_BUFFER_TEST_DATA "" // Satisfies Intellisense
 #endif
 
-#include <gtest/gtest.h>
-
 #include <format>
+#include <gtest/gtest.h>
 #include <json/buffer.hpp>
 
 using namespace std;
@@ -18,14 +17,13 @@ using namespace JNOVA;
  * TEST HELPER FUNCTIONS
  ****************************************************************/
 
-bool expectedJsonEquals(const string& actualJson)
+bool expectedJsonEquals(const string &actualJson)
 {
-    string expectedJson =
-      "{\n"
-      "  \"name\": \"JNOVA\",\n"
-      "  \"value\": 2025,\n"
-      "  \"nested\": { \"true\": true }\n"
-      "}\n";
+    string expectedJson = "{\n"
+                          "  \"name\": \"JNOVA\",\n"
+                          "  \"value\": 2025,\n"
+                          "  \"nested\": { \"true\": true }\n"
+                          "}\n";
 
     return expectedJson == actualJson;
 }
@@ -48,7 +46,7 @@ bool expectedJsonEquals(const string& actualJson)
  *==========================================================*/
 TEST(SxA_JsonBuffer, testSettingPath_setPathFuncMem)
 {
-    string jsonFilepath = TEST_JSON_PATH;
+    string jsonFilepath = JSON_BUFFER_TEST_DATA;
     JsonBuffer jbuf;
 
     jbuf.setFilepath(jsonFilepath);
@@ -68,7 +66,7 @@ TEST(SxA_JsonBuffer, testReadingData_readFuncMem)
 {
     JsonBuffer jbuf;
 
-    jbuf.setFilepath(TEST_JSON_PATH);
+    jbuf.setFilepath(JSON_BUFFER_TEST_DATA);
     jbuf.read();
 
     EXPECT_TRUE(expectedJsonEquals(jbuf.getData()));
@@ -80,7 +78,7 @@ TEST(SxA_JsonBuffer, testReadingData_readFuncMem)
 TEST(SxA_JsonBuffer, testReadingData_iStreamOper)
 {
     JsonBuffer jbuf;
-    fs::path jsonFilepath = TEST_JSON_PATH;
+    fs::path jsonFilepath = JSON_BUFFER_TEST_DATA;
 
     jsonFilepath >> jbuf;
 
@@ -97,8 +95,7 @@ TEST(SxA_JsonBuffer, testSettingData_ctor)
       "  \"name\": \"JNOVA\",\n"
       "  \"value\": 2025,\n"
       "  \"nested\": { \"true\": true }\n"
-      "}\n"
-    );
+      "}\n");
 
     EXPECT_TRUE(expectedJsonEquals(jbuf.getData()));
 }
