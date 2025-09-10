@@ -3,7 +3,8 @@ build/dev/*
 build/latest/*
 
 # Ignore Tests for now
-tests/data
+tests/data/*
+tests/sandbox.cpp
 
 # VS Code
 .vscode/settings.json
