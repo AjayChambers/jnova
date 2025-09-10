@@ -2,21 +2,21 @@
 Language: Cpp
 BasedOnStyle: Microsoft
 ColumnLimit: 90
-MaxEmptyLinesToKeep: 16
+MaxEmptyLinesToKeep: 8
 BreakBeforeBraces: Custom
 BraceWrapping:
-  AfterClass: true
-  AfterFunction: true
-  AfterStruct: false
-  AfterEnum: false
-  AfterNamespace: false
-  BeforeCatch: false 
-  BeforeElse: false
-  BeforeLambdaBody: false
-  AfterControlStatement: Never
-  SplitEmptyFunction: false
-  SplitEmptyRecord: false
-  SplitEmptyNamespace: false
+    AfterFunction: true
+    BeforeLambdaBody: true
+    AfterNamespace: false
+    AfterClass: false
+    AfterStruct: false
+    AfterEnum: false
+    BeforeCatch: false
+    BeforeElse: false
+    AfterControlStatement: Never
+    SplitEmptyFunction: false
+    SplitEmptyRecord: false
+    SplitEmptyNamespace: false
 
 # INDENTATION
 IndentWidth: 4
@@ -27,19 +27,26 @@ ConstructorInitializerIndentWidth: 0
 NamespaceIndentation: All
 UseTab: Never
 
+# CONTROL FLOW STYLE
+AllowShortBlocksOnASingleLine: true
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+
 # STRING FORMATTING STYLE
-AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakBeforeMultilineStrings: true
 BreakAdjacentStringLiterals: true
 BreakStringLiterals: true
 
-# FUNCTION FORMATTING
-AlignAfterOpenBracket: AlwaysBreak
-BinPackArguments: false
-BinPackParameters: OnePerLine
+# FUNCTION DEFINITION STYLE
 AllowAllArgumentsOnNextLine: false
-AllowAllParametersOfDeclarationOnNextLine: false
+BinPackArguments: false
 AllowShortFunctionsOnASingleLine: Inline
+AlignAfterOpenBracket: AlwaysBreak
 BreakAfterReturnType: None
+
+# FUNCTION DECLARATION STYLE
+BinPackParameters: OnePerLine
+BreakTemplateDeclarations: true
+AllowAllParametersOfDeclarationOnNextLine: false
 # BreakFunctionDefinitionParameters: true
 
 # CONSTRUCTOR STYLE
@@ -58,15 +65,16 @@ RemoveSemicolon: true
 AllowShortCaseExpressionOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: true
 AlignConsecutiveShortCaseStatements:
-  Enabled: true
-  AcrossComments: true
-  AlignCaseColons: true
+    Enabled: true
+    AcrossComments: true
+    AlignCaseColons: true
+IndentCaseBlocks: true
+IndentCaseLabels: true
 
 # MISCELLANEOUS
 FixNamespaceComments: false
 Cpp11BracedListStyle: true
 IncludeBlocks: Merge
-BreakTemplateDeclarations: true
 AlignTrailingComments:
     Kind: Always
     OverEmptyLines: 2
