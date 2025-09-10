@@ -10,14 +10,14 @@
 
 namespace fs = std::filesystem;
 using namespace std;
-using namespace JNOVA;
+using namespace Json;
 
 
 
 
 
 
-TEST(SxA_JsonBuffer, testSettingPath_setPathFuncMem)
+TEST(SUITE_JSON_LEXER, Test_foo)
 {
     string jsonExpected = //
       "{\n"

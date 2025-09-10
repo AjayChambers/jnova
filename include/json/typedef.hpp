@@ -3,6 +3,7 @@
 #ifndef JSON_TYPE_HPP
 #define JSON_TYPE_HPP
 
+#include <functional>
 #include <iostream>
 #include <map>
 #include <string>
@@ -29,6 +30,5 @@ struct Json : JsonType {
     Json(std::initializer_list<std::pair<const std::string, Json>> init);
 };
 
-using JsonType = std::variant<Num_J, Str_J, Bool_J, Null_J, Arr_J, Obj_J>;
 
 #endif

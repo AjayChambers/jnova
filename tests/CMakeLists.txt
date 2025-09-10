@@ -1,6 +1,6 @@
 # Include FetchContent
 include(FetchContent)
-FetchContent_Declare(googletest 
+FetchContent_Declare(googletest
     URL "https://github.com/google/googletest/archive/refs/tags/v1.17.0.zip")
 FetchContent_MakeAvailable(googletest)
 
@@ -13,6 +13,12 @@ include(CTest)
 enable_testing()
 
 
+# ADD A SANDBOX ENV THAT COMPILES TO AN EXECUTABLE
+add_executable(sandbox sandbox.cpp)
+target_include_directories(sandbox PUBLIC ../include)
+target_link_libraries(sandbox PUBLIC jsonLexer jsonBuffer)
+
+
 
 
 ################################
@@ -22,8 +28,8 @@ add_executable(JsonBufferTest JsonBuffer.test.cpp)
 add_test(NAME JsonBufferTest COMMAND JsonBufferTest)
 target_include_directories(JsonBufferTest PUBLIC "../include")
 target_link_libraries(
-    JsonBufferTest PUBLIC 
-    GTest::gtest_main 
+    JsonBufferTest PUBLIC
+    GTest::gtest_main
     jsonBuffer
 )
 
@@ -48,9 +54,9 @@ add_test(NAME JsonLexerTest COMMAND JsonLexerTest)
 
 target_include_directories(JsonLexerTest PUBLIC "../include")
 target_link_libraries(
-    JsonLexerTest PUBLIC 
+    JsonLexerTest PUBLIC
     GTest::gtest_main
-    jsonLexer 
+    jsonLexer
     jsonBuffer
 )
 

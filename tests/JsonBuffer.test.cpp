@@ -6,11 +6,8 @@
 #include <gtest/gtest.h>
 #include <json/buffer.hpp>
 
-
 using namespace std;
-using namespace JNOVA;
-
-
+using namespace Json;
 
 
 /*
@@ -19,32 +16,18 @@ using namespace JNOVA;
  ****************************************************************/
 bool expectedJsonEquals(const string &actualJson)
 {
-    string expectedJson = "{\n"
-                          "  \"name\": \"JNOVA\",\n"
-                          "  \"value\": 2025,\n"
-                          "  \"nested\": { \"true\": true }\n"
-                          "}\n";
+    string expectedJson
+      = "{\n"
+        "  \"name\": \"JNOVA\",\n"
+        "  \"value\": 2025,\n"
+        "  \"nested\": { \"true\": true }\n"
+        "}\n";
 
     return expectedJson == actualJson;
 }
 
 
-
-
-/*
- ****************************************************************
- * ACTUAL TESTS
- ****************************************************************/
-
-/*
- *==========================================================*
- * [SUITE A | TEST 00]
- *--------------------------------*
- * Suite-A: 'JsonBuffer Suite'
- * Test-00: 'Read Test'
- * Description: "Tests JBuff::setFilepath()."
- *==========================================================*/
-TEST(SxA_JsonBuffer, testSettingPath_setPathFuncMem)
+TEST(SUITE_JSON_BUFFER, Test_setFilepath)
 {
     string jsonFilepath = JSON_BUFFER_TEST_DATA;
     JsonBuffer jbuf;
@@ -54,15 +37,8 @@ TEST(SxA_JsonBuffer, testSettingPath_setPathFuncMem)
 }
 
 
-/*
- *==========================================================*
- * [SUITE A | TEST 01]
- *--------------------------------*
- * Suite-A: 'JsonBuffer Suite'
- * Test-01: 'Read Test'
- * Desc: "Tests JBuff::read()."
- *==========================================================*/
-TEST(SxA_JsonBuffer, testReadingData_readFuncMem)
+
+TEST(SUITE_JSON_BUFFER, Test_readJsonFile)
 {
     JsonBuffer jbuf;
 
@@ -73,9 +49,8 @@ TEST(SxA_JsonBuffer, testReadingData_readFuncMem)
 }
 
 
-/*
- */
-TEST(SxA_JsonBuffer, testReadingData_iStreamOper)
+
+TEST(SUITE_JSON_BUFFER, Test_inStreamOperatorOverload)
 {
     JsonBuffer jbuf;
     fs::path jsonFilepath = JSON_BUFFER_TEST_DATA;
@@ -86,9 +61,9 @@ TEST(SxA_JsonBuffer, testReadingData_iStreamOper)
 }
 
 
-/*
- */
-TEST(SxA_JsonBuffer, testSettingData_ctor)
+
+
+TEST(SUITE_JSON_BUFFER, Test_ctorInitialization)
 {
     JsonBuffer jbuf(
       "{\n"

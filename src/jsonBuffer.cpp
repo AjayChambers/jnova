@@ -2,7 +2,7 @@
 
 using namespace std;
 
-namespace JNOVA {
+namespace Json {
 
   JsonBuffer::JsonBuffer() {}
 
@@ -118,4 +118,4 @@ namespace JNOVA {
   }
 
 
-} // namespace JNOVA
+} // namespace Json

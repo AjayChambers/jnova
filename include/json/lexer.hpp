@@ -3,91 +3,81 @@
 #ifndef LEXER_HPP
 #define LEXER_HPP
 
+#include <exception>
 #include <iostream>
 #include <json/buffer.hpp>
+#include <map>
 #include <memory>
 #include <optional>
+#include <set>
+#include <stdexcept>
 #include <string>
 #include <string_view>
+#include <unordered_set>
 #include <variant>
 #include <vector>
 
-using namespace std;
-
-using Number     = variant<int, double>;
-using TokenValue = variant<Number, string, char>;
+using Number          = std::variant<int, double>;
+using TokenValue      = std::variant<Number, std::string, char>;
+using TokenIdentifier = std::pair<char, std::string>;
 
 enum class TokenType {
-    Curly_Brace_Opened, // <- Curly Brace Opened
-    Curly_Brace_Closed, // <- Curly Brace Closed
-    Sq_Bracket_Opened,  // <- Square Bracket Opened
-    Sq_Bracket_Closed,  // <- Square Bracket Closed
-    Comma,              // <- Comma
-    Colon,              // <- Colon
-    String,             // <- Dynamic String Value
-    Number,             // <- Dynamic Number Value
-    Null_Literal,       // <- Null Literal
-    True_Literal,       // <- True Literal
-    False_Literal,      // <- False Literal
-    Newline,            // <- Whitespace Linebreak
-    Space,              // <- Whitespace Space
-    Tab
+    ObjectOpen,  // 0
+    ObjectClose, // 1
+    ArrayOpen,   // 2
+    ArrayClose,  // 3
+    Comma,       // 4
+    Colon,       // 5
+    True,        // 6
+    False,       // 7
+    Null,        // 8
+    String,      // 9
+    Number,      // 10
+    Linebreak,   // 11
+    Space,       // 12
+    Tab          // 13
 };
 
+namespace Json {
+    const std::string toString(TokenType type);
 
 
 
 
-
-// [CTRL] + [SHIFT] + [B]
-
-namespace JNOVA {
     struct Token {
+        // Immutable Properties
         const TokenType type;
         const TokenValue value;
-
-        unsigned int row;
-        unsigned int col;
-
-      public:
-        Token(
-          const TokenType &type,
-          const TokenValue &val,
-          unsigned int row,
-          unsigned int col);
-
-        void setRow(unsigned int row);
-        void setCol(unsigned int col);
-
-        unsigned int getRow() const noexcept;
-        unsigned int getCol() const noexcept;
+        const std::string toString();
     };
 
-    class Tokenizer
-    {
+
+
+
+
+    class TokenControl {
+        std::map<char, std::string> token_identifier;
+        std::vector<char> char_identity;
+
+      public:
+        TokenControl();
+
+        void addTokenIdentifier(char identifiedBy, TokenType tokenType);
+        std::pair<char, std::string> getTokenIdentifier();
+    };
+
+
+
+
+
+
+    class Tokenizer {
+      private:
+        const JsonBuffer json;
         std::vector<Token> tokens;
 
       public:
-        Tokenizer();
-        Tokenizer(JsonBuffer json);
-
-        auto tokenFactory(
-          TokenType type,
-          TokenValue value,
-          unsigned int row,
-          unsigned int col);
+        Tokenizer(const JsonBuffer &json);
     };
-
-
-    optional<string> toString(TokenType type);
-
-
-
-}
-
-
-
-
-
-
+} // Namespace Json
 #endif

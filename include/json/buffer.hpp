@@ -22,7 +22,7 @@
 namespace fs = std::filesystem;
 
 
-namespace JNOVA {
+namespace Json {
 class JsonBuffer
 {
     fs::path path         = "";
@@ -52,5 +52,5 @@ class JsonBuffer
     friend void operator>>(const fs::path &is, JsonBuffer &jbuff);
     friend std::ostream &operator<<(std::ostream &os, JsonBuffer &jbuff);
 };
-} // namespace JNOVA
+} // namespace Json
 #endif
