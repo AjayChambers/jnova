@@ -2,29 +2,30 @@
 Language: Cpp
 BasedOnStyle: Microsoft
 ColumnLimit: 90
-MaxEmptyLinesToKeep: 8
+MaxEmptyLinesToKeep: 10
 BreakBeforeBraces: Custom
 BraceWrapping:
-    AfterFunction: true
-    BeforeLambdaBody: true
-    AfterNamespace: false
-    AfterClass: false
-    AfterStruct: false
-    AfterEnum: false
-    BeforeCatch: false
-    BeforeElse: false
-    AfterControlStatement: Never
-    SplitEmptyFunction: false
-    SplitEmptyRecord: false
-    SplitEmptyNamespace: false
+  AfterFunction: true
+  BeforeLambdaBody: true
+  AfterNamespace: false
+  AfterCaseLabel: false
+  AfterClass: false
+  AfterStruct: false
+  AfterEnum: false
+  BeforeCatch: true
+  BeforeElse: true
+  AfterControlStatement: Always
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
 
 # INDENTATION
-IndentWidth: 4
+IndentWidth: 2
 AccessModifierOffset: -2
-ContinuationIndentWidth: 2
-BracedInitializerIndentWidth: 2
+ContinuationIndentWidth: 3
+BracedInitializerIndentWidth: 3
 ConstructorInitializerIndentWidth: 0
-NamespaceIndentation: All
+NamespaceIndentation: None # All | None
 UseTab: Never
 
 # CONTROL FLOW STYLE
@@ -37,7 +38,7 @@ BreakAdjacentStringLiterals: true
 BreakStringLiterals: true
 
 # FUNCTION DEFINITION STYLE
-AllowAllArgumentsOnNextLine: false
+AllowAllArgumentsOnNextLine: true
 BinPackArguments: false
 AllowShortFunctionsOnASingleLine: Inline
 AlignAfterOpenBracket: AlwaysBreak
@@ -65,16 +66,50 @@ RemoveSemicolon: true
 AllowShortCaseExpressionOnASingleLine: true
 AllowShortCaseLabelsOnASingleLine: true
 AlignConsecutiveShortCaseStatements:
-    Enabled: true
-    AcrossComments: true
-    AlignCaseColons: true
-IndentCaseBlocks: true
+  Enabled: true
+  AlignCaseColons: true
+IndentCaseBlocks: false
 IndentCaseLabels: true
+
+# INCLUDE BLOCKS
+IncludeBlocks: Regroup
+IncludeCategories:
+  ##############################
+  ## JNOVA's STATIC JSON LIBS
+  - Regex: '^(<|")(json)(\/.+)("|>)$'
+    Priority: 1
+    SortPriority: 10
+    CaseSensitive: true
+  ##############################
+  ## GTEST/GMOCK LIBS
+  - Regex: '^(<|")(gtest|gmock)(\/.+)("|>)$'
+    Priority: 1
+    SortPriority: 20
+    CaseSensitive: true
+  ##############################
+  ## STD LIB: CONTAINERS
+  - Regex: "^(<array>|<deque>|<flat_set>|<flat_map>|<flat_multiset>|<flat_multimap>|<forward_list>|<hive>|<inplace_vector>|<list>|<map>|<multiset>|<multimap>|<priority_queue>|<queue>|<set>|<span>|<mdspan>|<stack>|<unordered_set>|<unordered_map>|<unordered_multiset>|<unordered_multimap>|<vector>)$"
+    Priority: 2
+    SortPriority: 30
+  ##############################
+  ## STD LIB: NON-CONTAINERS
+  - Regex: '^(<|")(.+)("|>)$'
+    Priority: 3
+    SortPriority: 40
+  ##############################
+  ## SRC/HDR FILEPATH INCLUDES
+  - Regex: '^"(.*)(\.c|\.cc|\.cpp|\.cxx|\.h|\.hh|\.hpp|\.hxx)"$'
+    Priority: 9
+    SortPriority: 98
+  ##############################
+  ## ALL ELSE
+  - Regex: "^(.*)$"
+    Priority: 9
+    SortPriority: 99
 
 # MISCELLANEOUS
 FixNamespaceComments: false
 Cpp11BracedListStyle: true
-IncludeBlocks: Merge
 AlignTrailingComments:
-    Kind: Always
-    OverEmptyLines: 2
+  Kind: Always
+  OverEmptyLines: 2

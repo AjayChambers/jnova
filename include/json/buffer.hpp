@@ -3,17 +3,10 @@
 #ifndef JSONBUFFER_HPP
 #define JSONBUFFER_HPP
 
-
-// #include <source_location>
-// #include <stacktrace>
-// #include <optional>  // For optional stacktrace
-// #include <exception>
-
-
+#include <exception>
 #include <filesystem>
-#include <fstream>
 #include <format>
-#include <iostream>
+#include <fstream>
 #include <stdexcept>
 #include <string>
 #include <string_view>
@@ -21,10 +14,8 @@
 
 namespace fs = std::filesystem;
 
-
 namespace Json {
-class JsonBuffer
-{
+class JsonBuffer {
     fs::path path         = "";
     std::string data      = "";
     std::string_view view = "";
@@ -40,14 +31,14 @@ class JsonBuffer
     void clear() noexcept;
 
     // Accessors & Mutators
-    void setFilepath(const std::string &jsonpath) noexcept;
+    void setPath(const std::string &jsonpath) noexcept;
     void setData(const std::string &jsonData) noexcept;
 
     const std::string getPath() const noexcept;
     const std::string getData() const noexcept;
     const std::string_view viewData() const noexcept;
 
-    JsonBuffer operator=(JsonBuffer &rightside);
+    JsonBuffer operator=(JsonBuffer &jsonBuffer);
 
     friend void operator>>(const fs::path &is, JsonBuffer &jbuff);
     friend std::ostream &operator<<(std::ostream &os, JsonBuffer &jbuff);
