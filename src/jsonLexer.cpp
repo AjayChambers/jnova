@@ -117,7 +117,6 @@ void JsonAnalyzer::trackPosition(unsigned char ch)
 
 
 
-
 optional<TOKEN_TYPE> JsonAnalyzer::identifyTokenType(const unsigned char ch)
 {
   if (tokenTypeIdentifiers.contains(ch))
@@ -133,16 +132,13 @@ optional<TOKEN_TYPE> JsonAnalyzer::identifyTokenType(const unsigned char ch)
 
 
 
-
-
 void JsonAnalyzer::analyze()
 {
   string_view json = jsonBuffer.viewData();
 
   if (json.length() < 2)
     throw new range_error(
-       "Error, json data contains to few chars to be able to analyze it.");
-
+       "Ex, json data contains to few chars to be able to analyze it.");
 
   sv_iterator iter = json.begin();
 
@@ -158,15 +154,9 @@ void JsonAnalyzer::analyze()
 
     if (tokenType == nullopt)
     {
-      format("An err PARSER ERROR", ch);
+      // format("An err PARSER ERROR", ch);
       throw runtime_error("ERROR: invalid json format. ");
     }
-
   }
 }
-
-
-
-
-
 }
